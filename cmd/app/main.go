@@ -3,12 +3,18 @@ package main
 import (
 	"github.com/luciorim/todo-server/internal/cache"
 	"github.com/luciorim/todo-server/internal/config"
-	"github.com/luciorim/todo-server/internal/controller"
 	"github.com/luciorim/todo-server/internal/controller/controllerImpl"
+	"github.com/luciorim/todo-server/internal/router"
 	"github.com/luciorim/todo-server/internal/service/serviceImpl"
 	"log"
 )
 
+// @title Todo Server
+// @version 2.0
+// @description Server allows manage your daily tasks
+
+// @host localhost:8181
+// @BasePath /api/
 func main() {
 	//init config
 	cfg := config.MustInit()
@@ -23,8 +29,7 @@ func main() {
 	taskController := controllerImpl.NewTaskController(taskService)
 
 	//init app router
-	appRouter := controller.NewAppRouter(taskController)
-
+	appRouter := router.NewAppRouter(taskController)
 	appRouter.InitRoutes()
 
 	//run server
